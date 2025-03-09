@@ -3,7 +3,7 @@ import scrapy
 # Import the CrawlerProcess: for running the spider
 from scrapy.crawler import CrawlerProcess
 
-# Create the Spider class
+# Creates the Spider class
 
 class Jumia(scrapy.Spider):
  name = "jumia"
@@ -13,7 +13,7 @@ class Jumia(scrapy.Spider):
     yield scrapy.Request(url = url_top_deals,
     callback = self.parse_front)
 
- # First parsing method
+ # A parsing method
  def parse_front(self, response):
     deal_box = response.css('article.prd _box col _hvr')
     jumia_deal_links = deal_box.xpath('./a/@href')
@@ -22,7 +22,7 @@ class Jumia(scrapy.Spider):
         yield response.follow(url = url,
         callback = self.parse_pages)
 
- # Second parsing method
+ # A second parsing method
  def parse_pages(self, response):
  #global jumia_dict
     price_of_product = response.xpath('//div[contains(@class,"df -i-ctr -fw-w -pas -brbl-fsale -rad4-bot")]/text()')
